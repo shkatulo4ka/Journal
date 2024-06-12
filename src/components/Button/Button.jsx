@@ -1,9 +1,17 @@
-import './Button.css';
+import "./Button.css";
+import { useState } from "react";
 
 function Button() {
-    return (
-        <button>Сохранить</button>
-    )
-};
+  const [text, setText] = useState("Сохранить");
+  const clicked = () => {
+    setText("Закрыть");
+    console.log("Кнопка");
+  };
+  return (
+    <button onClick={clicked} className="button accent">
+      {text}
+    </button>
+  );
+}
 
 export default Button;
