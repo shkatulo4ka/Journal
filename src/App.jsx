@@ -34,30 +34,17 @@ function App() {
         text: item.text,
         title: item.title,
         date: new Date(item.date),
-        id: Math.max(...oldItems.map((i) => i.id)) + 1,
+        id: oldItems.length > 0 ? Math.max(...oldItems.map((i) => i.id)) + 1 : 1,
       },
     ]);
   };
 
-  const sortItems = (a, b) => {
-    if (a.date < b.date) {
-      return 1;
-    } else {
-      return -1;
-    }
-  };
   return (
     <div className="app">
       <LeftPanel>
-        <Header />
-        <JournalAddButton />
-        <JournalList>
-          {items.sort(sortItems).map((el) => (
-            <CardButton key={el.id}>
-              <JournalItem title={el.title} text={el.text} date={el.date} />
-            </CardButton>
-          ))}
-        </JournalList>
+          <Header />
+          <JournalAddButton />
+          <JournalList items={items} />
       </LeftPanel>
       <Body>
         <JournalForm onSubmit={addItem} />
@@ -65,5 +52,4 @@ function App() {
     </div>
   );
 }
-
-export default App;
+export default App
