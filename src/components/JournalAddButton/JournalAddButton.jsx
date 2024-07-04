@@ -5,7 +5,7 @@ function JournalAddButton() {
   return (
     <CardButton className="journal-add">
       <img src="./add.svg" alt="Добавить" />
-      Новый поход
+      Новая заметка
     </CardButton>
   );
 }
