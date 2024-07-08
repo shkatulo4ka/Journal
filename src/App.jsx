@@ -1,5 +1,5 @@
 import "./App.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CardButton from "./components/CardButton/CardButtton";
 import JournalAddButton from "./components/JournalAddButton/JournalAddButton";
 import JournalItem from "./components/JournalItem/JournalItem";
@@ -10,22 +10,36 @@ import Header from "./components/Header/Header";
 import JournalForm from "./components/JournalForm/JournalForm";
 
 function App() {
-  const initialData = [
-    {
-      id: 1,
-      title: "Приэльбрусье-Узункол",
-      text: "Спортивный поход 1 категории сложности",
-      date: new Date(),
-    },
-    {
-      id: 2,
-      title: "Грузия",
-      text: "Треккинг с восхождением",
-      date: new Date(),
-    },
-  ];
+  // const initialData = [
+  //   // {
+  //   //   "id": 1,
+  //   //   "title": "Приэльбрусье-Узункол",
+  //   //   "text": "Спортивный поход 1 категории сложности",
+  //   //   "date": new Date(),
+  //   // },
+  //   // {
+  //   //   "id": 2,
+  //   //   "title": "Грузия",
+  //   //   "text": "Треккинг с восхождением",
+  //   //   "date": new Date(),
+  //   // },
+  // ];
 
-  const [items, setItems] = useState(initialData);
+  const [items, setItems] = useState([]);
+
+  useEffect(() => {
+    const data = JSON.parse(localStorage.getItem('data'));
+    if (data) {
+      setItems(data.map(item => ({
+        ...item,
+        date: new Date(item.date),
+      })));
+    }     
+  }, []);
+
+  useEffect(() => {
+    console.log(items)
+  }, [items])
 
   const addItem = (item) => {
     setItems((oldItems) => [
