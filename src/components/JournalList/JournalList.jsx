@@ -3,10 +3,10 @@ import CardButton from "../CardButton/CardButtton";
 import JournalItem from "../JournalItem/JournalItem";
 
 function JournalList({ items }) {
-  if (items.length === 0){
+  if (items.length === 0) {
     return <p>Записей пока нет, добавьте первую</p>;
   }
-    const sortItems = (a, b) => {
+  const sortItems = (a, b) => {
     if (a.date < b.date) {
       return 1;
     } else {
@@ -14,11 +14,16 @@ function JournalList({ items }) {
     }
   };
 
-  return <>  {items.sort(sortItems).map(el => (
-            <CardButton key={el.id}>
-              <JournalItem title={el.title} text={el.text} date={el.date} />
-            </CardButton>
-          ))}</>
+  return (
+    <>
+      {" "}
+      {items.sort(sortItems).map((el) => (
+        <CardButton key={el.id}>
+          <JournalItem title={el.title} text={el.text} date={el.date} />
+        </CardButton>
+      ))}
+    </>
+  );
 }
 
 export default JournalList;

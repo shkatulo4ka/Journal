@@ -1,8 +1,6 @@
 import "./App.css";
 import { useEffect, useState } from "react";
-import CardButton from "./components/CardButton/CardButtton";
 import JournalAddButton from "./components/JournalAddButton/JournalAddButton";
-import JournalItem from "./components/JournalItem/JournalItem";
 import JournalList from "./components/JournalList/JournalList";
 import Body from "./components/layouts/Body/Body";
 import LeftPanel from "./components/layouts/LeftPanel/LeftPanel";
@@ -28,27 +26,31 @@ function App() {
   const [items, setItems] = useState([]);
 
   useEffect(() => {
-    const data = JSON.parse(localStorage.getItem('data'));
+    const data = JSON.parse(localStorage.getItem("data"));
     if (data) {
-      setItems(data.map(item => ({
-        ...item,
-        date: new Date(item.date),
-      })));
-    }     
+      setItems(
+        data.map((item) => ({
+          ...item,
+          date: new Date(item.date),
+        })),
+      );
+    }
   }, []);
 
   useEffect(() => {
-    console.log(items)
-  }, [items])
+    console.log(items);
+  }, [items]);
 
   const addItem = (item) => {
+    console.log(item);
     setItems((oldItems) => [
       ...oldItems,
       {
         text: item.text,
         title: item.title,
         date: new Date(item.date),
-        id: oldItems.length > 0 ? Math.max(...oldItems.map((i) => i.id)) + 1 : 1,
+        id:
+          oldItems.length > 0 ? Math.max(...oldItems.map((i) => i.id)) + 1 : 1,
       },
     ]);
   };
@@ -56,9 +58,9 @@ function App() {
   return (
     <div className="app">
       <LeftPanel>
-          <Header />
-          <JournalAddButton />
-          <JournalList items={items} />
+        <Header />
+        <JournalAddButton />
+        <JournalList items={items} />
       </LeftPanel>
       <Body>
         <JournalForm onSubmit={addItem} />
@@ -66,4 +68,4 @@ function App() {
     </div>
   );
 }
-export default App
+export default App;
