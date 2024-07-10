@@ -38,7 +38,9 @@ function App() {
   }, []);
 
   useEffect(() => {
-    console.log(items);
+    if (items.length) {
+      localStorage.setItem("data", JSON.stringify(items));
+    }
   }, [items]);
 
   const addItem = (item) => {
