@@ -6,7 +6,7 @@ import LeftPanel from "./components/layouts/LeftPanel/LeftPanel";
 import Header from "./components/Header/Header";
 import JournalForm from "./components/JournalForm/JournalForm";
 import { useLocalStorage } from "./components/hooks/use-localstorage.hook";
-import { UserContext } from "./context/user.context";
+import { UserContextProvider } from "./context/user.context";
 
 function mapItems(items) {
   if (!items) {
@@ -19,21 +19,6 @@ function mapItems(items) {
 }
 
 function App() {
-  // const initialData = [
-  //   // {
-  //   //   "id": 1,
-  //   //   "title": "Приэльбрусье-Узункол",
-  //   //   "text": "Спортивный поход 1 категории сложности",
-  //   //   "date": new Date(),
-  //   // },
-  //   // {
-  //   //   "id": 2,
-  //   //   "title": "Грузия",
-  //   //   "text": "Треккинг с восхождением",
-  //   //   "date": new Date(),
-  //   // },
-  // ];
-
   const [items, setItems] = useLocalStorage("data");
 
   const addItem = (item) => {
@@ -41,8 +26,7 @@ function App() {
     setItems([
       ...mapItems(items),
       {
-        text: item.text,
-        title: item.title,
+        ...item,
         date: new Date(item.date),
         id: items.length > 0 ? Math.max(...items.map((i) => i.id)) + 1 : 1,
       },
@@ -50,7 +34,7 @@ function App() {
   };
 
   return (
-    <UserContext.Provider value={{ userId: 1 }}>
+    <UserContextProvider>
       <div className="app">
         <LeftPanel>
           <Header />
@@ -61,7 +45,7 @@ function App() {
           <JournalForm onSubmit={addItem} />
         </Body>
       </div>
-    </UserContext.Provider>
+    </UserContextProvider>
   );
 }
 export default App;
