@@ -13,12 +13,6 @@
     min-width: 150px;
 }
 
-.form-row{
-    color: #FFF;
-    display: flex;
-    align-items: center;
-}
-
 .input {
     color: #FFF;
     border: none;
@@ -31,8 +25,29 @@
     border-bottom: 1px solid #323232;
     width: 100%;
 }
+.form-row{
+    color: #FFF;
+    display: flex;
+    align-items: center;
+}
+
+
 
 .invalid {
     background: rgb(70, 39, 39) ;
     border: 1 px solid red
+}
+
+.delete {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    height: 30px;
+    width: 30px;
+}
+
+.delete:hover {
+    background: rgb(255,255,255,0.05);
+    border-radius: 50%;
 }
